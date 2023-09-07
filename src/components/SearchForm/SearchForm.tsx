@@ -4,6 +4,9 @@ import SearchInput from '../SearchInput/SearchInput';
 import SearchSelect from '../SearchSelect/SearchSelect';
 import './SearchForm.scss';
 
+const categories = ['all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry'];
+const sort = ['relevance', 'newest'];
+
 function SearchForm() {
   return (
     <div className="wrapper">
@@ -15,11 +18,11 @@ function SearchForm() {
         <div className="filters">
           <div>
             <label>Categories:</label>
-            <SearchSelect />
+            <SearchSelect values={categories}/>
           </div>
           <div>
             <label>Sorting by:</label>
-            <SearchSelect />
+            <SearchSelect values={sort}/>
           </div>
         </div>
       </form>
