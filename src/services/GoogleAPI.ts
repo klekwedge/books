@@ -15,11 +15,6 @@ export const setQuery = ({ search, category, orderBy }: IRequestParams, currInde
   return `${baseUrl}?q=${search}+${cat}&orderBy=${orderBy}&startIndex=${currIndex}&maxResults=30&key=${API_KEY}`;
 };
 
-export const initionLoad = async () => {
-  const res = await axios.get(baseUrl);
-  return res;
-};
-
 export const getBooks = async (args: IRequestParams, currIndex: number) => {
   const res = await axios.get(setQuery(args, currIndex));
   return res;

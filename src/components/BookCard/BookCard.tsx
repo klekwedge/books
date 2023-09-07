@@ -1,6 +1,7 @@
-import './BookCard.scss'
+import { IBook } from '../../types';
+import './BookCard.scss';
 
-function BookCard() {
+function BookCard({ book }: { book: IBook }) {
   const id = 'gwJLEAAAQBAJ';
   const imgUrl = `https://books.google.com/books/publisher/content/images/frontcover/${id}?fife=w270`;
 
