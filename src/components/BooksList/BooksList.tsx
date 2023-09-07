@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import BookCard from '../BookCard/BookCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchBooks } from '../../slices/booksSlice';
+import './BooksList.scss'
 
 function BooksList() {
   const dispatch = useAppDispatch();
@@ -11,12 +12,12 @@ function BooksList() {
     dispatch(fetchBooks());
   }, []);
 
-  console.log(books);
+
   return (
-    <div>
-      {/* {books.map((book) => (
-        <BookCard />
-      ))} */}
+    <div className='book__list'>
+      {books.map((book) => (
+        <BookCard key={book.id} book={book}/>
+      ))}
     </div>
   );
 }
