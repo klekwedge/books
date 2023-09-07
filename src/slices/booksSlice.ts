@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import useFetch from '../hooks/useFetch';
-import { IBook } from '../types';
+import { IBook, ICurrentBook } from '../types';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -9,7 +9,7 @@ const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:art&order
 
 interface BooksState {
     books: IBook[];
-    currentBook: null | IBook;
+    currentBook: null | ICurrentBook;
 };
 
 const initialState: BooksState = {
@@ -21,6 +21,12 @@ export const fetchBooks = createAsyncThunk('books/fetchBooks', () => {
     const request = useFetch(baseUrl)
     return request;
 });
+
+export const fetchCurrentBook = createAsyncThunk('books/fetchCurrentBook', (id: string) => {
+    const request = useFetch(`https://www.googleapis.com/books/v1/volumes/${id}`)
+    return request;
+});
+
 
 const booksSlice = createSlice({
     name: 'books',
@@ -37,6 +43,15 @@ const booksSlice = createSlice({
                 state.books = action.payload.items
             })
             .addCase(fetchBooks.rejected, (state) => {
+
+            })
+            .addCase(fetchCurrentBook.pending, (state) => {
+
+            })
+            .addCase(fetchCurrentBook.fulfilled, (state, action) => {
+                state.currentBook = action.payload.volumeInfo
+            })
+            .addCase(fetchCurrentBook.rejected, (state) => {
 
             })
     },

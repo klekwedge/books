@@ -16,17 +16,19 @@
 
   h3 {
     margin: 1rem 0 0;
-    font-weight: var(--fw-bold);
+    font-weight: 500;
+    font-size: 30px;
   }
 
   h5 {
-    margin: 0.5rem 0 1rem;
-    font-size: var(--fs-sm);
-    color: var(--colors-grey);
+    margin: 5px 0px;
+    font-size: 20px;
+    color: gray;
   }
 
   .description {
     margin: 1rem 0;
+    font-size: 24px;
     width: 100%;
   }
 }

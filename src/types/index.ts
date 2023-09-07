@@ -10,6 +10,18 @@ export interface IBook {
     accessInfo: AccessInfo;
 }
 
+
+export interface ICurrentBook {
+    kind: string;
+    id: string;
+    etag: string;
+    selfLink: string;
+    volumeInfo: VolumeInfo;
+    layerInfo: LayerInfo;
+    saleInfo: SaleInfo;
+    accessInfo: AccessInfo;
+}
+
 export interface AccessInfo {
     country: string;
     viewability: string;
@@ -26,6 +38,15 @@ export interface AccessInfo {
 export interface Epub {
     isAvailable: boolean;
     acsTokenLink: string;
+}
+
+export interface LayerInfo {
+    layers: Layer[];
+}
+
+export interface Layer {
+    layerId: string;
+    volumeAnnotationsVersion: string;
 }
 
 export interface SaleInfo {
@@ -63,6 +84,7 @@ export interface VolumeInfo {
     industryIdentifiers: IndustryIdentifier[];
     readingModes: ReadingModes;
     pageCount: number;
+    printedPageCount: number;
     printType: string;
     categories: string[];
     maturityRating: string;
@@ -79,6 +101,10 @@ export interface VolumeInfo {
 export interface ImageLinks {
     smallThumbnail: string;
     thumbnail: string;
+    small: string;
+    medium: string;
+    large: string;
+    extraLarge: string;
 }
 
 export interface IndustryIdentifier {
