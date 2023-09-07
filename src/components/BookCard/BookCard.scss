@@ -1,16 +1,18 @@
 .book__card {
   max-width: 300px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  border-radius: 10px;
+  background: rgb(245, 245, 245);
+
   img {
     display: block;
+    border-radius: 5px;
     width: 100%;
-    padding: 1rem;
-    box-shadow: var(--shadow);
-    transform: scaleX(1);
-    transition: transform 1s;
   }
 
   div {
-    padding: 1rem 1.5rem 2rem;
+    padding: 10px 20px 10px;
   }
 
   h2 {
@@ -21,5 +23,9 @@
   h3 {
     font-size: 20px;
     font-weight: 400;
+  }
+
+  &:hover {
+    transform: scale(1.04);
   }
 }

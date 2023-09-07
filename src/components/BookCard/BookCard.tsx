@@ -19,8 +19,8 @@ function BookCard({ book }: { book: IBook }) {
         <h3>{book.volumeInfo.categories}</h3>
         <h2>
           {book.volumeInfo.title
-            ? book.volumeInfo.title.length > 80
-              ? `${book.volumeInfo.title.slice(0, 80)}...`
+            ? book.volumeInfo.title.length > 50
+              ? `${book.volumeInfo.title.slice(0, 50)}...`
               : book.volumeInfo.title
             : 'N/A'}
         </h2>

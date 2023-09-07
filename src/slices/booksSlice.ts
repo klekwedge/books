@@ -5,7 +5,7 @@ import { IBook, ICurrentBook } from '../types';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:art&orderBy=newest&maxResults=12&key=${API_KEY}`;
+const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:art&orderBy=newest&maxResults=20&key=${API_KEY}`;
 
 interface BooksState {
     books: IBook[];
@@ -50,6 +50,7 @@ const booksSlice = createSlice({
             })
             .addCase(fetchCurrentBook.fulfilled, (state, action) => {
                 state.currentBook = action.payload.volumeInfo
+                console.log(action.payload);
             })
             .addCase(fetchCurrentBook.rejected, (state) => {
 
