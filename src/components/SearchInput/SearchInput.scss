@@ -1,0 +1,22 @@
+input {
+  width: 100%;
+  min-width: 300px;
+  color: inherit;
+  height: 40px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border: 1px solid rgb(180, 180, 180);
+  }
+
+  &:focus {
+    border: 1px solid rgb(68, 130, 248);
+  }
+
+  &:active {
+    background-color: inherit;
+  }
+}

@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import SearchInput from '../SearchInput/SearchInput';
 import './SearchForm.scss';
 
 function SearchForm() {
@@ -6,7 +7,7 @@ function SearchForm() {
     <div className="wrapper">
       <form>
         <div className="search">
-          <input />
+          <SearchInput />
           <button type="button">Search</button>
         </div>
         <div className="filters">
