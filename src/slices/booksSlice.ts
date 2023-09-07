@@ -8,11 +8,13 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:art&orderBy=newest&maxResults=12&key=${API_KEY}`;
 
 interface BooksState {
-    books: IBook[]
+    books: IBook[];
+    currentBook: null | IBook;
 };
 
 const initialState: BooksState = {
     books: [],
+    currentBook: null,
 };
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', () => {

@@ -1,12 +1,19 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
+import { useNavigate } from 'react-router-dom';
 import { IBook } from '../../types';
 import './BookCard.scss';
 
 function BookCard({ book }: { book: IBook }) {
+  const navigate = useNavigate();
   const imgUrl = `https://books.google.com/books/publisher/content/images/frontcover/${book.id}?fife=w270`;
 
+  const bookOnClick = () => {
+    navigate(`/${book.id}`);
+  };
+
   return (
-    <div className="book__card">
+    <div className="book__card" onClick={bookOnClick}>
       <img src={imgUrl} alt="" />
       <div>
         <h3>{book.volumeInfo.categories}</h3>
