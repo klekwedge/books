@@ -1,0 +1,25 @@
+.card {
+  max-width: 300px;
+  img {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    transform: scaleX(1);
+    transition: transform 1s;
+  }
+
+  div {
+    padding: 1rem 1.5rem 2rem;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+}
