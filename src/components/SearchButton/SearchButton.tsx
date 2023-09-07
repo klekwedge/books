@@ -1,4 +1,4 @@
-import './SearchButtons.scss';
+import './SearchButton.scss';
 
 
 function SearchButton() {

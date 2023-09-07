@@ -19,8 +19,3 @@ export const getBooks = async (args: IRequestParams, currIndex: number) => {
   const res = await axios.get(setQuery(args, currIndex));
   return res;
 };
-
-export const getBookDetails = async (id: string) => {
-  const res = await axios.get(`${baseUrl}/${id}`);
-  return res;
-};

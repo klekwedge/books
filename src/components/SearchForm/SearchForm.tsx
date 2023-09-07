@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import SearchButton from '../SearchButton/SearchButton';
 import SearchInput from '../SearchInput/SearchInput';
+import SearchSelect from '../SearchSelect/SearchSelect';
 import './SearchForm.scss';
 
 function SearchForm() {
@@ -13,10 +14,12 @@ function SearchForm() {
         </div>
         <div className="filters">
           <div>
-            <label id="categories">Categories</label>
+            <label>Categories:</label>
+            <SearchSelect />
           </div>
           <div>
-            <label id="sorting">Sorting&nbsp;by</label>
+            <label>Sorting by:</label>
+            <SearchSelect />
           </div>
         </div>
       </form>
