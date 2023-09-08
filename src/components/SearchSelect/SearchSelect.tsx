@@ -1,8 +1,8 @@
 import './SearchSelect.scss';
 
-function SearchSelect({ values }: { values: string[] }) {
+function SearchSelect({ values, name }: { values: string[], name:string }) {
   return (
-    <select name="select">
+    <select name={name}>
       {values.map((value) => (
         <option key={value} value={value}>
           {value}

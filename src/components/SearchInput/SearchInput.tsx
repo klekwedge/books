@@ -2,7 +2,7 @@
 import './SearchInput.scss'
 
 function SearchInput() {
-  return <input autoFocus/>;
+  return <input autoFocus name='search'/>;
 }
 
 export default SearchInput;
