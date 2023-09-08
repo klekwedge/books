@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import BookCard from '../BookCard/BookCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchBooks } from '../../slices/booksSlice';
-import './BooksList.scss'
+import './BooksList.scss';
+import LoadButton from '../LoadButton/LoadButton';
 
 function BooksList() {
   const dispatch = useAppDispatch();
@@ -12,13 +13,15 @@ function BooksList() {
     dispatch(fetchBooks());
   }, []);
 
-
   return (
-    <div className='book__list'>
-      {books.map((book) => (
-        <BookCard key={book.id} book={book}/>
-      ))}
-    </div>
+    <>
+      <div className="book__list">
+        {books.map((book) => (
+          <BookCard key={book.id} book={book} />
+        ))}
+      </div>
+      <LoadButton />
+    </>
   );
 }
 

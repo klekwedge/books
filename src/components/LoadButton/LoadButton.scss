@@ -1,0 +1,16 @@
+.load-button {
+  display: block;
+  margin: 0 auto;
+  background-color: rgb(0, 106, 255);
+  color: #fff;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
+  height: 40px;
+  padding: 0 20px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

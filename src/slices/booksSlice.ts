@@ -13,6 +13,7 @@ interface BooksState {
     search: string;
     category: string;
     sort: string;
+    currentIndex: number;
 };
 
 const initialState: BooksState = {
@@ -21,6 +22,7 @@ const initialState: BooksState = {
     search: '',
     category: '',
     sort: '',
+    currentIndex: 30,
 };
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', () => {
@@ -33,14 +35,18 @@ export const fetchCurrentBook = createAsyncThunk('books/fetchCurrentBook', (id: 
     return request;
 });
 
-export const fetchFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort }: { search: string, category: string, sort: string }) => {
+export const fetchFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort, currentIndex }: { search: string, category: string, sort: string, currentIndex: number }) => {
     const cat = (category === 'all') ? null : `subject:${category}`;
-    const currIndex = 1;
-    const request = useFetch(`${baseUrl}?q=${search}+${cat}&orderBy=${sort}&startIndex=${currIndex}&maxResults=30&key=${API_KEY}`)
+    const request = useFetch(`${baseUrl}?q=${search}+${cat}&orderBy=${sort}&startIndex=${currentIndex}&maxResults=30&key=${API_KEY}`)
     return request;
 });
 
-
+export const fetchMortFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort }: { search: string, category: string, sort: string }) => {
+    const cat = (category === 'all') ? null : `subject:${category}`;
+    const currIndex = 100;
+    const request = useFetch(`${baseUrl}?q=${search}+${cat}&orderBy=${sort}&startIndex=${currIndex}&maxResults=30&key=${API_KEY}`)
+    return request;
+});
 
 
 const booksSlice = createSlice({
@@ -65,7 +71,7 @@ const booksSlice = createSlice({
             })
             .addCase(fetchCurrentBook.fulfilled, (state, action) => {
                 state.currentBook = action.payload.volumeInfo
-                console.log(action.payload);
+
             })
             .addCase(fetchCurrentBook.rejected, (state) => {
 
@@ -74,7 +80,17 @@ const booksSlice = createSlice({
 
             })
             .addCase(fetchFindBooks.fulfilled, (state, action) => {
-                state.books = action.payload.items
+                console.log(action.payload);
+
+
+                if (state.currentIndex === 30) {
+                    state.books.push(action.payload.items)
+                }
+                else {
+                    state.books = action.payload.items
+                }
+                state.currentIndex += 30;
+
             })
             .addCase(fetchFindBooks.rejected, (state) => {
 

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useAppDispatch } from '../../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchFindBooks } from '../../slices/booksSlice';
 import SearchButton from '../SearchButton/SearchButton';
 import SearchInput from '../SearchInput/SearchInput';
@@ -11,6 +11,7 @@ const sorting = ['relevance', 'newest'];
 
 function SearchForm() {
   const dispatch = useAppDispatch();
+  const { currentIndex } = useAppSelector((state) => state.books);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ function SearchForm() {
     const category = formData.get('category') as string;
     const sort = formData.get('sort') as string;
 
-    dispatch(fetchFindBooks({search, category, sort}))
+    dispatch(fetchFindBooks({ search, category, sort, currentIndex }));
   };
 
   return (
@@ -42,7 +43,7 @@ function SearchForm() {
           </div>
         </div>
       </form>
-      <h5 className="results">example</h5>
+      {/* <h5 className="results">example</h5> */}
     </div>
   );
 }
