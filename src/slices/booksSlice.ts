@@ -30,7 +30,7 @@ const initialState: BooksState = {
 };
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', () => {
-    const request = useFetch(`${baseUrl}?q=subject:art&orderBy=relevance&maxResults=20&key=${API_KEY}`)
+    const request = useFetch(`${baseUrl}?q=subject:computers&orderBy=relevance&maxResults=20&key=${API_KEY}`)
     return request;
 });
 

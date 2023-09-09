@@ -14,8 +14,10 @@ function SearchForm() {
   const { result, totalItems, search, category, sort } = useAppSelector((state) => state.books);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(fetchFindBooks({ search, category, sort }));
+    if (search) {
+      e.preventDefault();
+      dispatch(fetchFindBooks({ search, category, sort }));
+    }
   };
 
   return (
@@ -36,7 +38,13 @@ function SearchForm() {
           </div>
         </div>
       </form>
-      {result ? <h5 className="results">{totalItems} results for &apos;{result}&apos;</h5> : ''}
+      {result ? (
+        <h5 className="results">
+          {totalItems} results for &apos;{result}&apos;
+        </h5>
+      ) : (
+        ''
+      )}
     </div>
   );
 }
