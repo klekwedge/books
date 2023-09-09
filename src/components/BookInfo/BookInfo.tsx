@@ -20,10 +20,12 @@ function BookInfo() {
     return null;
   }
 
+  console.log(currentBook);
+
   return (
     <section className="info">
-      <img src={imgUrl} alt="" />
-      <div>
+      <img src={imgUrl} alt={currentBook.title} />
+      <div className='info__content'>
         <h3>{currentBook.title}</h3>
         <h5>{currentBook.categories ? currentBook.categories[0] : 'N/A'}</h5>
         <h5>{currentBook.authors ? currentBook.authors.join(', ') : 'N/A'}</h5>
