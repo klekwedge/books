@@ -2,7 +2,7 @@ import './ErrorMessage.scss';
 
 function ErrorMessage() {
   return (
-    <section style={{ width: '800px', gap: '20px', flexDirection: 'column' }}>
+    <section>
       <svg id="500_Bill" viewBox="-8.5 9.5 560 250">
         <defs>
           <clipPath id="circle-mask">

@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from '../../pages/MainPage';
 import BookPage from '../../pages/BookPage';
-import './App.scss'
 import Page404 from '../../pages/Page404/Page404';
+import './App.scss'
 
 function App() {
   return (

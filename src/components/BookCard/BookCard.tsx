@@ -1,5 +1,6 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import { useNavigate } from 'react-router-dom';
 import { IBook } from '../../types';
 import './BookCard.scss';

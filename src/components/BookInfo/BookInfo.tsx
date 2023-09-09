@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import parse from 'html-react-parser';
 import { Link, useParams } from 'react-router-dom';
+import parse from 'html-react-parser';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchCurrentBook } from '../../slices/booksSlice';
-import './BookInfo.scss';
 import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import './BookInfo.scss';
 
 function BookInfo() {
   const { currentBook, currentBookLoadingStatus } = useAppSelector((state) => state.books);

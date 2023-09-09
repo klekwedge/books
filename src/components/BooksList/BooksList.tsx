@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import BookCard from '../BookCard/BookCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchBooks } from '../../slices/booksSlice';
-import './BooksList.scss';
 import LoadButton from '../LoadButton/LoadButton';
 import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import './BooksList.scss';
 
 function BooksList() {
   const dispatch = useAppDispatch();
