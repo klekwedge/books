@@ -5,10 +5,11 @@ import { fetchBooks } from '../../slices/booksSlice';
 import './BooksList.scss';
 import LoadButton from '../LoadButton/LoadButton';
 import Spinner from '../Spinner/Spinner';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 function BooksList() {
   const dispatch = useAppDispatch();
-  const { books, result, booksLoadingStatus, currentIndex } = useAppSelector((state) => state.books);
+  const { books, totalItems, booksLoadingStatus } = useAppSelector((state) => state.books);
 
   useEffect(() => {
     dispatch(fetchBooks());
@@ -18,11 +19,14 @@ function BooksList() {
     return <Spinner />;
   }
 
+  if (booksLoadingStatus === 'error') {
+    return <ErrorMessage />;
+  }
+
   return (
     <>
       <div className="book__list">{books && books.map((book) => <BookCard key={book.id} book={book} />)}</div>
-      {/* {booksLoadingStatus === 'loading' ? <Spinner /> : ''} */}
-      {result ? <LoadButton /> : ''}
+      {totalItems ? <LoadButton /> : ''}
     </>
   );
 }
