@@ -65,7 +65,7 @@ function Page404() {
         Home Page
       </Link>
     </div>
-  );
+  )
 }
 
 export default Page404;

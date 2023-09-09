@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
+import parse from 'html-react-parser';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchCurrentBook } from '../../slices/booksSlice';
 import './BookInfo.scss';
+import Spinner from '../Spinner/Spinner';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 function BookInfo() {
-  const { currentBook } = useAppSelector((state) => state.books);
+  const { currentBook, currentBookLoadingStatus } = useAppSelector((state) => state.books);
   const { bookId } = useParams();
   const dispatch = useAppDispatch();
   const imgUrl = `https://books.google.com/books/publisher/content/images/frontcover/${bookId}?fife=w480-h960`;
@@ -16,23 +19,29 @@ function BookInfo() {
     }
   }, [bookId]);
 
-  if(!currentBook) {
-    return null;
+  if (currentBookLoadingStatus === 'loading') {
+    return <Spinner />;
   }
 
-  console.log(currentBook);
+  if (currentBookLoadingStatus === 'error') {
+    return <ErrorMessage />;
+  }
+
+  if (!currentBook) {
+    return null;
+  }
 
   return (
     <section className="info">
       <img src={imgUrl} alt={currentBook.title} />
-      <div className='info__content'>
+      <div className="info__content">
         <h3>{currentBook.title}</h3>
         <h5>{currentBook.categories ? currentBook.categories[0] : 'N/A'}</h5>
         <h5>{currentBook.authors ? currentBook.authors.join(', ') : 'N/A'}</h5>
         <h5>
           {currentBook.publisher}, {currentBook.publishedDate}, {currentBook.printedPageCount} pages
         </h5>
-        <div className="description">{currentBook.description ? currentBook.description : 'N/A'}</div>
+        <div className="description">{currentBook.description ? parse(currentBook.description) : 'N/A'}</div>
       </div>
     </section>
   );

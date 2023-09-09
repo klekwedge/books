@@ -11,6 +11,7 @@ interface BooksState {
     books: IBook[];
     booksLoadingStatus: Loading;
     currentBook: null | ICurrentBook;
+    currentBookLoadingStatus: Loading;
     search: string;
     category: string;
     sort: string;
@@ -23,6 +24,7 @@ const initialState: BooksState = {
     books: [],
     booksLoadingStatus: 'loading',
     currentBook: null,
+    currentBookLoadingStatus: 'loading',
     search: '',
     category: 'all',
     sort: 'relevance',
@@ -91,14 +93,14 @@ const booksSlice = createSlice({
                 state.booksLoadingStatus = 'error'
             })
             .addCase(fetchCurrentBook.pending, (state) => {
-
+                state.currentBookLoadingStatus = 'loading'
             })
             .addCase(fetchCurrentBook.fulfilled, (state, action) => {
                 state.currentBook = action.payload.volumeInfo
-
+                state.currentBookLoadingStatus = 'idle'
             })
             .addCase(fetchCurrentBook.rejected, (state) => {
-
+                state.currentBookLoadingStatus = 'error'
             })
             .addCase(fetchFindBooks.pending, (state) => {
                 state.booksLoadingStatus = 'loading'
