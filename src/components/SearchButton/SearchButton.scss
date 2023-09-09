@@ -7,4 +7,12 @@
   display: flex;
   align-items: center;
   border-radius: 0px 5px 5px 0px;
+  transition: all 0.5s ease;
+  background: white;
+  border: 1px solid #ddd;
+
+  &:hover {
+    background: rgb(68, 130, 248);
+    color: white;
+  }
 }

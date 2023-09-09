@@ -16,13 +16,10 @@ function BookCard({ book }: BookCardProps) {
     navigate(`/${book.id}`);
   };
 
-  // console.log(book.volumeInfo);
-
   return (
-    <div className="book__card" onClick={bookOnClick}>
+    <div className="book__card card" onClick={bookOnClick}>
       <img src={imgUrl} alt="" />
       <div>
-        <h3>{book.volumeInfo.categories}</h3>
         <h2>
           {book.volumeInfo.title
             ? book.volumeInfo.title.length > 50
@@ -30,13 +27,14 @@ function BookCard({ book }: BookCardProps) {
               : book.volumeInfo.title
             : 'N/A'}
         </h2>
-        <h3>
+        <h3 className='card__authors'>
           {book.volumeInfo.authors && book.volumeInfo.authors.length > 4
             ? `${book.volumeInfo.authors.slice(0, 4).join(', ')}...`
             : book.volumeInfo.authors
             ? book.volumeInfo.authors.join(', ')
             : 'N/A'}
         </h3>
+        <h3 className='card__categories'>{book.volumeInfo.categories}</h3>
       </div>
     </div>
   );

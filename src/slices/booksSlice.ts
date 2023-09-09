@@ -22,11 +22,11 @@ const initialState: BooksState = {
     search: '',
     category: 'all',
     sort: 'relevance',
-    currentIndex: 0,
+    currentIndex: 30,
 };
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', () => {
-    const request = useFetch(`${baseUrl}?q=subject:art&orderBy=newest&maxResults=20&key=${API_KEY}`)
+    const request = useFetch(`${baseUrl}?q=subject:art&orderBy=relevance&maxResults=20&key=${API_KEY}`)
     return request;
 });
 
@@ -35,14 +35,23 @@ export const fetchCurrentBook = createAsyncThunk('books/fetchCurrentBook', (id: 
     return request;
 });
 
-interface FetchBooksArgs {
+interface FindBooksArgs {
     search: string;
     category: string;
     sort: string;
+}
+
+export const fetchFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort }: FindBooksArgs) => {
+    const bookCategory = (category === 'all') ? null : `subject:${category}`;
+    const request = useFetch(`${baseUrl}?q=${search}+${bookCategory}&orderBy=${sort}&startIndex=0&maxResults=30&key=${API_KEY}`)
+    return request;
+});
+
+interface MoreBooksArgs extends FindBooksArgs {
     currentIndex: number;
 }
 
-export const fetchFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort, currentIndex }: FetchBooksArgs) => {
+export const fetchMoreBooks = createAsyncThunk('books/fetchMoreBooks', ({ search, category, sort, currentIndex }: MoreBooksArgs) => {
     const bookCategory = (category === 'all') ? null : `subject:${category}`;
     const request = useFetch(`${baseUrl}?q=${search}+${bookCategory}&orderBy=${sort}&startIndex=${currentIndex}&maxResults=30&key=${API_KEY}`)
     return request;
@@ -88,16 +97,19 @@ const booksSlice = createSlice({
 
             })
             .addCase(fetchFindBooks.fulfilled, (state, action) => {
-                console.log(state.currentIndex);
-                if (state.currentIndex !== 0) {
-                    state.books.push(...action.payload.items)
-                }
-                else {
-                    state.books = action.payload.items
-                }
-                state.currentIndex += 30;
+                state.books = action.payload.items
             })
             .addCase(fetchFindBooks.rejected, (state) => {
+
+            })
+            .addCase(fetchMoreBooks.pending, (state) => {
+
+            })
+            .addCase(fetchMoreBooks.fulfilled, (state, action) => {
+                state.books.push(...action.payload.items)
+                state.currentIndex += 30;
+            })
+            .addCase(fetchMoreBooks.rejected, (state) => {
 
             })
     },

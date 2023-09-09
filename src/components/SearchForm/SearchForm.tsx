@@ -11,11 +11,11 @@ const sorting = ['relevance', 'newest'];
 
 function SearchForm() {
   const dispatch = useAppDispatch();
-  const { currentIndex, search, category, sort } = useAppSelector((state) => state.books);
+  const { search, category, sort } = useAppSelector((state) => state.books);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(fetchFindBooks({ search, category, sort, currentIndex }));
+    dispatch(fetchFindBooks({ search, category, sort }));
   };
 
   return (

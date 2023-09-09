@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { fetchFindBooks } from '../../slices/booksSlice';
+import { fetchMoreBooks } from '../../slices/booksSlice';
 import './LoadButton.scss';
 
 function LoadButton() {
@@ -7,7 +7,7 @@ function LoadButton() {
   const { currentIndex, search, category, sort } = useAppSelector((state) => state.books);
 
   const handleClick = () => {
-    dispatch(fetchFindBooks({ search, category, sort, currentIndex }));
+    dispatch(fetchMoreBooks({ search, category, sort, currentIndex }));
   };
 
   return (

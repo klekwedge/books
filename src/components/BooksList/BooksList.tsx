@@ -9,12 +9,9 @@ function BooksList() {
   const dispatch = useAppDispatch();
   const { books } = useAppSelector((state) => state.books);
 
-  // useEffect(() => {
-  //   dispatch(fetchBooks());
-  // }, []);
-
-  console.log(books);
-
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, []);
 
   return (
     <>
