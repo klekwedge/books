@@ -14,6 +14,8 @@ interface BooksState {
     category: string;
     sort: string;
     currentIndex: number;
+    result: string;
+    totalItems: number;
 };
 
 const initialState: BooksState = {
@@ -23,6 +25,8 @@ const initialState: BooksState = {
     category: 'all',
     sort: 'relevance',
     currentIndex: 30,
+    result: '',
+    totalItems: 0
 };
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', () => {
@@ -97,6 +101,8 @@ const booksSlice = createSlice({
 
             })
             .addCase(fetchFindBooks.fulfilled, (state, action) => {
+                state.result = state.search;
+                state.totalItems = action.payload.totalItems;
                 state.books = action.payload.items
             })
             .addCase(fetchFindBooks.rejected, (state) => {

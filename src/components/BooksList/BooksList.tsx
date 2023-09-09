@@ -13,10 +13,12 @@ function BooksList() {
     dispatch(fetchBooks());
   }, []);
 
+
+
   return (
     <>
       <div className="book__list">
-        {books.map((book) => (
+        {books && books.map((book) => (
           <BookCard key={book.id} book={book} />
         ))}
       </div>

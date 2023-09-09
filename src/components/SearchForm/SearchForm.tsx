@@ -11,7 +11,7 @@ const sorting = ['relevance', 'newest'];
 
 function SearchForm() {
   const dispatch = useAppDispatch();
-  const { search, category, sort } = useAppSelector((state) => state.books);
+  const { result, totalItems, search, category, sort } = useAppSelector((state) => state.books);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ function SearchForm() {
           </div>
         </div>
       </form>
-      {/* <h5 className="results">example</h5> */}
+      {result ? <h5 className="results">{totalItems} results for &apos;{result}&apos;</h5> : ''}
     </div>
   );
 }
