@@ -10,7 +10,6 @@ export interface IBook {
     accessInfo: AccessInfo;
 }
 
-
 export interface ICurrentBook {
     kind: string;
     id: string;
@@ -121,3 +120,5 @@ export interface ReadingModes {
     text: boolean;
     image: boolean;
 }
+
+export type Loading = 'idle' | 'loading' | 'error'

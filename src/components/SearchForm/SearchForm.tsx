@@ -14,8 +14,8 @@ function SearchForm() {
   const { result, totalItems, search, category, sort } = useAppSelector((state) => state.books);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (search) {
-      e.preventDefault();
       dispatch(fetchFindBooks({ search, category, sort }));
     }
   };

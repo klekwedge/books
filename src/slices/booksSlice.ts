@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import useFetch from '../hooks/useFetch';
-import { IBook, ICurrentBook } from '../types';
+import { IBook, ICurrentBook, Loading } from '../types';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -9,6 +9,7 @@ const baseUrl = 'https://www.googleapis.com/books/v1/volumes';
 
 interface BooksState {
     books: IBook[];
+    booksLoadingStatus: Loading;
     currentBook: null | ICurrentBook;
     search: string;
     category: string;
@@ -20,6 +21,7 @@ interface BooksState {
 
 const initialState: BooksState = {
     books: [],
+    booksLoadingStatus: 'loading',
     currentBook: null,
     search: '',
     category: 'all',
@@ -79,13 +81,14 @@ const booksSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchBooks.pending, (state) => {
-
+                state.booksLoadingStatus = 'loading'
             })
             .addCase(fetchBooks.fulfilled, (state, action) => {
                 state.books = action.payload.items
+                state.booksLoadingStatus = 'idle'
             })
             .addCase(fetchBooks.rejected, (state) => {
-
+                state.booksLoadingStatus = 'error'
             })
             .addCase(fetchCurrentBook.pending, (state) => {
 
@@ -98,25 +101,27 @@ const booksSlice = createSlice({
 
             })
             .addCase(fetchFindBooks.pending, (state) => {
-
+                state.booksLoadingStatus = 'loading'
             })
             .addCase(fetchFindBooks.fulfilled, (state, action) => {
                 state.result = state.search;
+                state.booksLoadingStatus = 'idle'
                 state.totalItems = action.payload.totalItems;
                 state.books = action.payload.items
             })
             .addCase(fetchFindBooks.rejected, (state) => {
-
+                state.booksLoadingStatus = 'error'
             })
             .addCase(fetchMoreBooks.pending, (state) => {
-
+                // state.booksLoadingStatus = 'loading'
             })
             .addCase(fetchMoreBooks.fulfilled, (state, action) => {
                 state.books.push(...action.payload.items)
+                // state.booksLoadingStatus = 'idle'
                 state.currentIndex += 30;
             })
             .addCase(fetchMoreBooks.rejected, (state) => {
-
+                // state.booksLoadingStatus = 'error'
             })
     },
 });
