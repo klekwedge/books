@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import parse from 'html-react-parser';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchCurrentBook } from '../../slices/booksSlice';
 import './BookInfo.scss';
@@ -32,18 +32,21 @@ function BookInfo() {
   }
 
   return (
-    <section className="info">
-      <img src={imgUrl} alt={currentBook.title} />
-      <div className="info__content">
-        <h3>{currentBook.title}</h3>
-        <h5>{currentBook.categories ? currentBook.categories[0] : 'N/A'}</h5>
-        <h5>{currentBook.authors ? currentBook.authors.join(', ') : 'N/A'}</h5>
-        <h5>
-          {currentBook.publisher}, {currentBook.publishedDate}, {currentBook.printedPageCount} pages
-        </h5>
-        <div className="description">{currentBook.description ? parse(currentBook.description) : 'N/A'}</div>
-      </div>
-    </section>
+    <>
+      <Link to="/" className='button-back'>Back</Link>
+      <section className="info">
+        <img src={imgUrl} alt={currentBook.title} />
+        <div className="info__content">
+          <h3>{currentBook.title}</h3>
+          <h5>{currentBook.categories ? currentBook.categories[0] : 'N/A'}</h5>
+          <h5>{currentBook.authors ? currentBook.authors.join(', ') : 'N/A'}</h5>
+          <h5>
+            {currentBook.publisher}, {currentBook.publishedDate}, {currentBook.printedPageCount} pages
+          </h5>
+          <div className="description">{currentBook.description ? parse(currentBook.description) : 'N/A'}</div>
+        </div>
+      </section>
+    </>
   );
 }
 

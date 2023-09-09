@@ -1,5 +1,22 @@
+.button-back {
+  align-self: start;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: rgb(0, 106, 255);
+  padding: 5px 10px;
+  background: white;
+  border-radius: 10px;
+  font-size: 18px;
+  border: 1px solid gray;
+  transition: all 0.5s ease;
+
+  &:hover {
+    background: rgb(0, 106, 255);
+    color: white;
+  }
+}
+
 .info {
-  margin-top: 50px;
   width: 100%;
   display: flex;
   gap: 40px;
@@ -11,10 +28,11 @@
   h3 {
     font-weight: 500;
     font-size: 30px;
+    margin-bottom: 15px;
   }
 
   h5 {
-    margin: 5px 0px;
+    margin-bottom: 5px;
     font-size: 18px;
     color: gray;
   }
