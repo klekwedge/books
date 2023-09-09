@@ -20,9 +20,9 @@ const initialState: BooksState = {
     books: [],
     currentBook: null,
     search: '',
-    category: '',
-    sort: '',
-    currentIndex: 30,
+    category: 'all',
+    sort: 'relevance',
+    currentIndex: 0,
 };
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', () => {
@@ -35,23 +35,16 @@ export const fetchCurrentBook = createAsyncThunk('books/fetchCurrentBook', (id: 
     return request;
 });
 
-interface FetchFindBooksArgs {
+interface FetchBooksArgs {
     search: string;
     category: string;
     sort: string;
     currentIndex: number;
 }
 
-export const fetchFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort, currentIndex }: FetchFindBooksArgs) => {
-    const cat = (category === 'all') ? null : `subject:${category}`;
-    const request = useFetch(`${baseUrl}?q=${search}+${cat}&orderBy=${sort}&startIndex=${currentIndex}&maxResults=30&key=${API_KEY}`)
-    return request;
-});
-
-export const fetchMortFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort }: { search: string, category: string, sort: string }) => {
-    const cat = (category === 'all') ? null : `subject:${category}`;
-    const currIndex = 100;
-    const request = useFetch(`${baseUrl}?q=${search}+${cat}&orderBy=${sort}&startIndex=${currIndex}&maxResults=30&key=${API_KEY}`)
+export const fetchFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort, currentIndex }: FetchBooksArgs) => {
+    const bookCategory = (category === 'all') ? null : `subject:${category}`;
+    const request = useFetch(`${baseUrl}?q=${search}+${bookCategory}&orderBy=${sort}&startIndex=${currentIndex}&maxResults=30&key=${API_KEY}`)
     return request;
 });
 
@@ -95,17 +88,14 @@ const booksSlice = createSlice({
 
             })
             .addCase(fetchFindBooks.fulfilled, (state, action) => {
-                console.log(action.payload);
-
-
-                if (state.currentIndex === 30) {
-                    state.books.push(action.payload.items)
+                console.log(state.currentIndex);
+                if (state.currentIndex !== 0) {
+                    state.books.push(...action.payload.items)
                 }
                 else {
                     state.books = action.payload.items
                 }
                 state.currentIndex += 30;
-
             })
             .addCase(fetchFindBooks.rejected, (state) => {
 

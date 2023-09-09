@@ -4,13 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import { IBook } from '../../types';
 import './BookCard.scss';
 
-function BookCard({ book }: { book: IBook }) {
+interface BookCardProps {
+  book: IBook;
+}
+
+function BookCard({ book }: BookCardProps) {
   const navigate = useNavigate();
   const imgUrl = `https://books.google.com/books/publisher/content/images/frontcover/${book.id}?fife=w270`;
 
   const bookOnClick = () => {
     navigate(`/${book.id}`);
   };
+
+  // console.log(book.volumeInfo);
 
   return (
     <div className="book__card" onClick={bookOnClick}>
