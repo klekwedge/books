@@ -35,7 +35,14 @@ export const fetchCurrentBook = createAsyncThunk('books/fetchCurrentBook', (id: 
     return request;
 });
 
-export const fetchFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort, currentIndex }: { search: string, category: string, sort: string, currentIndex: number }) => {
+interface FetchFindBooksArgs {
+    search: string;
+    category: string;
+    sort: string;
+    currentIndex: number;
+}
+
+export const fetchFindBooks = createAsyncThunk('books/fetchFindBooks', ({ search, category, sort, currentIndex }: FetchFindBooksArgs) => {
     const cat = (category === 'all') ? null : `subject:${category}`;
     const request = useFetch(`${baseUrl}?q=${search}+${cat}&orderBy=${sort}&startIndex=${currentIndex}&maxResults=30&key=${API_KEY}`)
     return request;
@@ -53,7 +60,15 @@ const booksSlice = createSlice({
     name: 'books',
     initialState,
     reducers: {
-
+        setSearch(state, action) {
+            state.search = action.payload
+        },
+        setCategory(state, action) {
+            state.category = action.payload
+        },
+        setSort(state, action) {
+            state.sort = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -100,5 +115,5 @@ const booksSlice = createSlice({
 
 
 const { actions, reducer } = booksSlice;
-// export const { } = actions;
+export const { setSearch, setCategory, setSort } = actions;
 export default reducer;

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { fetchFindBooks } from '../../slices/booksSlice';
+import { fetchFindBooks, setCategory, setSort } from '../../slices/booksSlice';
 import SearchButton from '../SearchButton/SearchButton';
 import SearchInput from '../SearchInput/SearchInput';
 import SearchSelect from '../SearchSelect/SearchSelect';
@@ -11,17 +11,10 @@ const sorting = ['relevance', 'newest'];
 
 function SearchForm() {
   const dispatch = useAppDispatch();
-  const { currentIndex } = useAppSelector((state) => state.books);
+  const { currentIndex, search, category, sort } = useAppSelector((state) => state.books);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const target = e.target as HTMLFormElement;
-    const formData = new FormData(target);
-
-    const search = formData.get('search') as string;
-    const category = formData.get('category') as string;
-    const sort = formData.get('sort') as string;
-
     dispatch(fetchFindBooks({ search, category, sort, currentIndex }));
   };
 
@@ -35,11 +28,11 @@ function SearchForm() {
         <div className="filters">
           <div>
             <label>Categories:</label>
-            <SearchSelect name="category" values={categories} />
+            <SearchSelect setValue={setCategory} value={category} name="category" data={categories} />
           </div>
           <div>
             <label>Sorting by:</label>
-            <SearchSelect name="sort" values={sorting} />
+            <SearchSelect setValue={setSort} value={sort} name="sort" data={sorting} />
           </div>
         </div>
       </form>
